@@ -207,6 +207,11 @@ class UrdfConverter(object):
             _construct_capsule(
                 c_geom.find('cylinder'), col_global_offset + cur_offset,
                 col_total_rot))
+      elif c_geom.find('capsule') is not None:
+        body.colliders.append(
+            _construct_capsule(
+                c_geom.find('capsule'), col_global_offset + cur_offset,
+                col_total_rot))
       elif c_geom.find('box') is not None:
         body.colliders.append(
             _construct_box(
