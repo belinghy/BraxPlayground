@@ -25,6 +25,7 @@ from brax.io.json import JaxEncoder
 
 from google.protobuf import json_format
 
+VIEWER_COUNT = 0
 
 def save_html(path: str,
               sys: brax.System,
@@ -49,6 +50,8 @@ def render(sys: brax.System, qps: List[brax.QP], height: int = 480) -> str:
   system = json.dumps(d, cls=JaxEncoder)
   html = _HTML.replace('<!-- system json goes here -->', system)
   html = html.replace('<!-- viewer height goes here -->', f'{height}px')
+  html = html.replace('BRAX_VIEWER_ID', f'brax-viewer-{globals()["VIEWER_COUNT"]}')
+  globals()["VIEWER_COUNT"] += 1
   return html
 
 
@@ -61,7 +64,7 @@ _HTML = """
         margin: 0;
         padding: 0;
       }
-      #brax-viewer {
+      #BRAX_VIEWER_ID {
         margin: 0;
         padding: 0;
         height: <!-- viewer height goes here -->;
@@ -72,11 +75,10 @@ _HTML = """
     <script type="application/javascript">
     var system = <!-- system json goes here -->;
     </script>
-    <div id="brax-viewer"></div>
+    <div id="BRAX_VIEWER_ID"></div>
     <script type="module">
       import {Viewer} from 'https://cdn.jsdelivr.net/gh/google/brax@v0.0.7/js/viewer.js';
-      const candidates = document.querySelectorAll("[id='brax-viewer']");
-      const domElement = candidates[candidates.length-1];
+      const domElement = document.getElementById("BRAX_VIEWER_ID");
       var viewer = new Viewer(domElement, system);
     </script>
   </body>
