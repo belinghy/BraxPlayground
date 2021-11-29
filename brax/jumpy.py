@@ -38,7 +38,7 @@ def _in_jit() -> bool:
 def _which_np(*args):
   """Returns np or jnp depending on args."""
   for a in args:
-    if isinstance(a, jnp.ndarray):
+    if isinstance(a, jnp.ndarray) and not isinstance(a, onp.ndarray):
       return jnp
   return onp
 
@@ -390,3 +390,7 @@ def array(object: Any, dtype=None) -> ndarray:
     np = _which_np(object)  # object is not iterable (e.g. primitive type)
   return np.array(object, dtype)
 
+
+def abs(a: ndarray) -> ndarray:
+  """Calculate the absolute value element-wise."""
+  return _which_np(a).abs(a)
