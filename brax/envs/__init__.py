@@ -33,6 +33,7 @@ from brax.envs import reacher
 from brax.envs import reacherangle
 from brax.envs import ur5e
 from brax.envs import walker2d
+from brax.envs import walker3d
 from brax.envs import wrappers
 from brax.envs.env import Env, State, Wrapper
 import gym
@@ -53,6 +54,7 @@ _envs = {
     'reacherangle': reacherangle.ReacherAngle,
     'ur5e': ur5e.Ur5e,
     'walker2d': walker2d.Walker2d,
+    'walker3d': walker3d.Walker3d,
 }
 
 
