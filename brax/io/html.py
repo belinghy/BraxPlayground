@@ -77,7 +77,7 @@ _HTML = """
     </script>
     <div id="BRAX_VIEWER_ID"></div>
     <script type="module">
-      import {Viewer} from 'https://cdn.jsdelivr.net/gh/google/brax@main/js/viewer.js';
+      import {Viewer} from 'https://cdn.jsdelivr.net/gh/google/brax@0.0.8/js/viewer.js';
       const domElement = document.getElementById("BRAX_VIEWER_ID");
       var viewer = new Viewer(domElement, system);
     </script>
